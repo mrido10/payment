@@ -44,7 +44,7 @@ func (p payment) Notification(req map[string]interface{}) (bool, error) {
 	var mtErr *midtrans.Error
 	transactionStatusResp, err := p.CheckTransaction(orderId)
 	if err != nil && err != mtErr {
-		return false, err.RawError
+		return false, errors.New(err.Error())
 	}
 
 	if transactionStatusResp == nil {
