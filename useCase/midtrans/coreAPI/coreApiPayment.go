@@ -30,7 +30,7 @@ func (p payment) GenerateTransaction(charge *coreapi.ChargeReq) (*coreapi.Charge
 	var mtErr *midtrans.Error
 	resp, err := p.ChargeTransaction(charge)
 	if err != nil && err != mtErr {
-		return nil, err.RawError
+		return nil, errors.New(err.Error())
 	}
 	return resp, nil
 }
