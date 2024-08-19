@@ -2,6 +2,7 @@ package coreAPI
 
 import (
 	"errors"
+
 	"github.com/mrido10/payment/domain/midtransPay"
 
 	"github.com/midtrans/midtrans-go"
@@ -35,29 +36,39 @@ func (p payment) GenerateTransaction(charge *coreapi.ChargeReq) (*coreapi.Charge
 	return resp, nil
 }
 
+/*
+Notification is to checking status on midtrans by order_id
+
+settlement:	succes
+pending: 	waiting
+cancel: 	fail
+expire: 	fail
+*/
 func (p payment) Notification(req map[string]interface{}) (bool, error) {
 	orderId, exists := req["order_id"].(string)
 	if !exists {
-		return false, errors.New("payment: order_id doesn't exists")
+		return false, errors.New("order_id doesn't exists")
 	}
 
-	var mtErr *midtrans.Error
 	transactionStatusResp, err := p.CheckTransaction(orderId)
-	if err != nil && err != mtErr {
+	if err != nil {
 		return false, errors.New(err.Error())
 	}
 
 	if transactionStatusResp == nil {
-		return false, errors.New("payment: no response status")
+		return false, errors.New("no response status")
 	}
 
-	if transactionStatusResp.TransactionStatus == "settlement" {
+	switch transactionStatusResp.TransactionStatus {
+	case "settlement":
 		return true, nil
+	case "capture":
+		if transactionStatusResp.FraudStatus == "accept" {
+			return true, nil
+		} else {
+			return true, errors.New(transactionStatusResp.FraudStatus)
+		}
+	default:
+		return false, errors.New(transactionStatusResp.TransactionStatus)
 	}
-
-	if transactionStatusResp.TransactionStatus == "capture" && transactionStatusResp.FraudStatus == "accept" {
-		return true, nil
-	}
-
-	return false, nil
 }

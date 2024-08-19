@@ -12,8 +12,9 @@ var config = midtransPay.Config{
 }
 
 func main() {
+	midtrans.DefaultLoggerLevel = &midtrans.LoggerImplementation{LogLevel: midtrans.LogError}
 	QrisTransaction(midtrans.TransactionDetails{
-		OrderID:  "ORDER-test4",
+		OrderID:  "ORDER-test1",
 		GrossAmt: 10000,
 	})
 }
