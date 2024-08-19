@@ -3,6 +3,7 @@ package midtransPay
 import (
 	"github.com/midtrans/midtrans-go/coreapi"
 	"github.com/midtrans/midtrans-go/snap"
+	errz "github.com/mrido10/error"
 )
 
 type Config struct {
@@ -17,6 +18,6 @@ type Snap interface {
 }
 
 type CoreApi interface {
-	GenerateTransaction(*coreapi.ChargeReq) (*coreapi.ChargeResponse, error)
-	Notification(map[string]interface{}) (bool, error)
+	GenerateTransaction(*coreapi.ChargeReq) (*coreapi.ChargeResponse, *errz.Error)
+	Notification(map[string]interface{}) (bool, *errz.Error)
 }

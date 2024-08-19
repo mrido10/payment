@@ -1,6 +1,10 @@
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/midtrans/midtrans-go v1.3.8 h1:r6eq51LJwbMQ05dBF3Twg99u45G3pLxP5INYoqOoNzU=
 github.com/midtrans/midtrans-go v1.3.8/go.mod h1:5hN2oiZDP3/SwSBxHPTg8eC/RVoRE9DXQOY1Ah9au10=
+github.com/mrido10/error v0.0.0-20240807072403-2ffe372df2cc h1:olc1uwn0hf7wpSt3JuVDVZhW9lu7VJGuxSxXbxptttU=
+github.com/mrido10/error v0.0.0-20240807072403-2ffe372df2cc/go.mod h1:Audr7AcFpB0OleeDd62stdzCummgDd7HOxWLalwpTLY=
+github.com/mrido10/error v1.0.0 h1:m0+uznURnzgZyATWC0SWXWl9BHHJ5RAYoWi0GjiBz8s=
+github.com/mrido10/error v1.0.0/go.mod h1:Audr7AcFpB0OleeDd62stdzCummgDd7HOxWLalwpTLY=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=

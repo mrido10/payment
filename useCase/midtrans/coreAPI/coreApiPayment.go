@@ -1,8 +1,7 @@
 package coreAPI
 
 import (
-	"errors"
-
+	errz "github.com/mrido10/error"
 	"github.com/mrido10/payment/domain/midtransPay"
 
 	"github.com/midtrans/midtrans-go"
@@ -27,11 +26,11 @@ func New(m midtransPay.Config) midtransPay.CoreApi {
 	}
 }
 
-func (p payment) GenerateTransaction(charge *coreapi.ChargeReq) (*coreapi.ChargeResponse, error) {
+func (p payment) GenerateTransaction(charge *coreapi.ChargeReq) (*coreapi.ChargeResponse, *errz.Error) {
 	var mtErr *midtrans.Error
 	resp, err := p.ChargeTransaction(charge)
 	if err != nil && err != mtErr {
-		return nil, errors.New(err.Error())
+		return nil, errz.InternalServerErrorBadRequest(err.Message)
 	}
 	return resp, nil
 }
@@ -44,19 +43,19 @@ pending: 	waiting
 cancel: 	fail
 expire: 	fail
 */
-func (p payment) Notification(req map[string]interface{}) (bool, error) {
+func (p payment) Notification(req map[string]interface{}) (bool, *errz.Error) {
 	orderId, exists := req["order_id"].(string)
 	if !exists {
-		return false, errors.New("order_id doesn't exists")
+		return false, errz.NotFound("order_id doesn't exists")
 	}
 
 	transactionStatusResp, err := p.CheckTransaction(orderId)
 	if err != nil {
-		return false, errors.New(err.Error())
+		return false, errz.InternalServerErrorBadRequest(err.Error())
 	}
 
 	if transactionStatusResp == nil {
-		return false, errors.New("no response status")
+		return false, errz.BadRequest("no response status")
 	}
 
 	switch transactionStatusResp.TransactionStatus {
@@ -66,9 +65,9 @@ func (p payment) Notification(req map[string]interface{}) (bool, error) {
 		if transactionStatusResp.FraudStatus == "accept" {
 			return true, nil
 		} else {
-			return true, errors.New(transactionStatusResp.FraudStatus)
+			return false, errz.BadRequest(transactionStatusResp.FraudStatus)
 		}
 	default:
-		return false, errors.New(transactionStatusResp.TransactionStatus)
+		return false, errz.BadRequest(transactionStatusResp.TransactionStatus)
 	}
 }
