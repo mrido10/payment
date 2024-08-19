@@ -3,6 +3,8 @@ github.com/midtrans/midtrans-go v1.3.8 h1:r6eq51LJwbMQ05dBF3Twg99u45G3pLxP5INYoq
 github.com/midtrans/midtrans-go v1.3.8/go.mod h1:5hN2oiZDP3/SwSBxHPTg8eC/RVoRE9DXQOY1Ah9au10=
 github.com/mrido10/error v0.0.0-20240807072403-2ffe372df2cc h1:olc1uwn0hf7wpSt3JuVDVZhW9lu7VJGuxSxXbxptttU=
 github.com/mrido10/error v0.0.0-20240807072403-2ffe372df2cc/go.mod h1:Audr7AcFpB0OleeDd62stdzCummgDd7HOxWLalwpTLY=
+github.com/mrido10/error v0.0.0-20240819083012-dd4cd40c216e h1:dSRkq5/YTjr6wn5G+VR/qzVExNMyXLOJvIiH0bVnn+o=
+github.com/mrido10/error v0.0.0-20240819083012-dd4cd40c216e/go.mod h1:Audr7AcFpB0OleeDd62stdzCummgDd7HOxWLalwpTLY=
 github.com/mrido10/error v1.0.0 h1:m0+uznURnzgZyATWC0SWXWl9BHHJ5RAYoWi0GjiBz8s=
 github.com/mrido10/error v1.0.0/go.mod h1:Audr7AcFpB0OleeDd62stdzCummgDd7HOxWLalwpTLY=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=

@@ -30,7 +30,7 @@ func (p payment) GenerateTransaction(charge *coreapi.ChargeReq) (*coreapi.Charge
 	var mtErr *midtrans.Error
 	resp, err := p.ChargeTransaction(charge)
 	if err != nil && err != mtErr {
-		return nil, errz.InternalServerErrorBadRequest(err.Message)
+		return nil, errz.InternalServerError(err.Message)
 	}
 	return resp, nil
 }
@@ -51,7 +51,7 @@ func (p payment) Notification(req map[string]interface{}) (bool, *errz.Error) {
 
 	transactionStatusResp, err := p.CheckTransaction(orderId)
 	if err != nil {
-		return false, errz.InternalServerErrorBadRequest(err.Error())
+		return false, errz.InternalServerError(err.Error())
 	}
 
 	if transactionStatusResp == nil {
