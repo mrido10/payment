@@ -46,11 +46,14 @@ expire: 	fail
 func (p payment) Notification(req map[string]interface{}) (bool, *errz.Error) {
 	orderId, exists := req["order_id"].(string)
 	if !exists {
-		return false, errz.NotFound("order_id doesn't exists")
+		return false, errz.NotFound("field order_id doesn't exists")
 	}
 
 	transactionStatusResp, err := p.CheckTransaction(orderId)
 	if err != nil {
+		if err.StatusCode == 404 {
+			return false, errz.NotFound("order_id doesn't exists")
+		}
 		return false, errz.InternalServerError(err.Error())
 	}
 
